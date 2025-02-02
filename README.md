@@ -54,9 +54,17 @@ I created this resource for the `Hackers Club`'s Machine Learning session at the
        "predictions": [2, 2, 2, 2, 2, 0, 1, 2, 1, 1]
      }
      ```
-
-To check any if there exists a module and its version, run `python -c "import <module>; print(<module>.__version__)"` after the installation. Replace `<module>` with module name.</br>
-Ex: `python -c "import pydantic; print(pydantic.__version__)"`.
+     
+10. Troubleshooting
+    
+   - Log saved at `mlflow_api`
+     
+   - To check if there exists a module and its version, run `python -c "import <module>; print(<module>.__version__)"` after the installation. Replace `<module>` with module name.</br>
+   Ex: `python -c "import pydantic; print(pydantic.__version__)"`.
+   
+   - miniconda installation guide: https://docs.anaconda.com/miniconda/install
+   
+   - Access mlflow tracking server UI: http://127.0.0.1:5000/
 
 ### Dataset
 
@@ -221,7 +229,7 @@ At the end, the notebook provides:
 3. Removes outliers using Z-score
 4. Encodes categorical features and target
 5. Removes highly correlated features
-6. Saves preprocessing cache for production
+6. Saves preprocessing cache for production(`production/caches.pkl`)
 7. Splits data into train and test sets
 8. Applies feature scaling
 9. Trains multiple classification models
