@@ -1,4 +1,6 @@
-## AirQualityPrediction
+## 🌬️ AirQualityPrediction
+
+<img src="https://i.postimg.cc/rzX3rRjy/air-quality-index-removebg-preview.png" width="150" height="150">
 
 I created this resource for the `Hackers Club`'s Machine Learning session at the `University of Peradeniya, Department of Computer Engineering`. It's designed to help beginners dive into the world of Machine Learning. The codes are meticulously prepared, well-organized, and thoroughly documented, ensuring a smooth learning experience for newcomers to ML.
 
