@@ -7,7 +7,7 @@ I created this resource for the `Hackers Club`'s Machine Learning session at the
 ### Instructions
 
 1. `git clone https://github.com/EshanJayasundara/AirQualityPrediction.git`
-2. `conda create -n air_quality python=3.12`
+2. `conda create -n air_quality python=3.12.4`
 3. `cd AirQualityPrediction`
 4. `pip install -r requirements.txt`
 5. Run the `AirQualityPrediction_Multiclass_MLFlow.ipynb` and this will create `production/caches.pkl` file which contains the preprocessing data to apply it at the production. (**Note:** Don't change the running order of the cells. Run exactly from top to bottom. Otherwise, some issues in the `caches` list can happen and may lead to many errors. **If you need to run an intermediate cell again, restart the kernel and run the whole notebook again.**)
