@@ -1,3 +1,10 @@
+"""
+Author: Eshan Jayasundara
+Date Created: 2025-02-02
+Last Modified: 2025-02-03
+Description: Fast API server to remote access in production with http requests
+"""
+
 import mlflow
 from mlflow.tracking import MlflowClient
 from fastapi import FastAPI, HTTPException
