@@ -7,66 +7,59 @@ I created this resource for the `Hackers Club`'s Machine Learning session at the
 ### Instructions
 
 1. `git clone https://github.com/EshanJayasundara/AirQualityPrediction.git`
-
 2. `conda create -n air_quality python=3.12`
-
 3. `cd AirQualityPrediction`
-
 4. `pip install -r requirements.txt`
+5. Run the `AirQualityPrediction_Multiclass_MLFlow.ipynb` and this will create `production/caches.pkl` file which contains the preprocessing data to apply it at the production. (**Note:** Don't change the running order of the cells. Run exactly from top to bottom. Otherwise, some issues in the `caches` list can happen and may lead to many errors. **If you need to run an intermediate cell again, restart the kernel and run the whole notebook again.**)
+6. `export PYTHONPATH=$PYTHONPATH:$(pwd)` on Linux, `$env:PYTHONPATH = "$env:PYTHONPATH;$(Get-Location)"` on Windows Powershell or `set PYTHONPATH=%PYTHONPATH%;%CD%` on Windows cmd.
+7. `mlflow server`
+8. `cd production`
+9. `fastapi dev main.py`
 
-5. `export PYTHONPATH=$PYTHONPATH:$(pwd)` on Linux, `$env:PYTHONPATH = "$env:PYTHONPATH;$(Get-Location)"` on Windows Powershell or `set PYTHONPATH=%PYTHONPATH%;%CD%` on Windows cmd.
+10. Open postmen and try
 
-6. `mlflow server`
+      - `GET` request to `http://127.0.0.1:8000` and will output,
+        ```json
+        {
+          "message": "MLflow API is running"
+        }
+        ```
+      - 'POST' request to `http://127.0.0.1:8000/predict` with `json` request body,
+      
+        ```json
+        {
+          "features": [
+            [29.8, 59.1, 5.2, 17.9, 18.9, 9.2, 1.72, 6.3, 319],
+            [28.3, 75.6, 2.3, 12.2, 30.8, 9.7, 1.64, 6.0, 611],
+            [23.1, 74.7, 26.7, 33.8, 24.4, 12.6, 1.63, 5.2, 619],
+            [27.1, 39.1, 6.1, 6.3, 13.5, 5.3, 1.15, 1.1, 551],
+            [26.5, 70.7, 6.9, 16.0, 21.9, 5.6, 1.01, 2.7, 303],
+            [39.4, 96.6, 14.6, 35.5, 42.9, 17.9, 1.82, 3.1, 674],
+            [41.7, 82.5, 1.7, 15.8, 31.1, 12.7, 1.8, 4.6, 735],
+            [31.0, 59.6, 5.0, 16.8, 24.2, 13.6, 1.38, 6.3, 443],
+            [29.4, 93.8, 10.3, 22.7, 45.1, 11.8, 2.03, 5.4, 486],
+            [33.2, 80.5, 11.1, 24.4, 32.0, 15.3, 1.69, 4.9, 535]
+          ]
+        }
+        ```
+      
+        and will output,
+      
+        ```json
+        {
+          "predictions": [2, 2, 2, 2, 2, 0, 1, 2, 1, 1]
+        }
+        ```
 
-7. `cd production`
+11. Troubleshooting
 
-8. `fastapi dev main.py`
-
-9. Open postmen and try
-
-   - `GET` request to `http://127.0.0.1:8000` and will output,
-     ```json
-     {
-       "message": "MLflow API is running"
-     }
-     ```
-   - 'POST' request to `http://127.0.0.1:8000/predict` with `json` request body,
-
-     ```json
-     {
-       "features": [
-         [29.8, 59.1, 5.2, 17.9, 18.9, 9.2, 1.72, 6.3, 319],
-         [28.3, 75.6, 2.3, 12.2, 30.8, 9.7, 1.64, 6.0, 611],
-         [23.1, 74.7, 26.7, 33.8, 24.4, 12.6, 1.63, 5.2, 619],
-         [27.1, 39.1, 6.1, 6.3, 13.5, 5.3, 1.15, 1.1, 551],
-         [26.5, 70.7, 6.9, 16.0, 21.9, 5.6, 1.01, 2.7, 303],
-         [39.4, 96.6, 14.6, 35.5, 42.9, 17.9, 1.82, 3.1, 674],
-         [41.7, 82.5, 1.7, 15.8, 31.1, 12.7, 1.8, 4.6, 735],
-         [31.0, 59.6, 5.0, 16.8, 24.2, 13.6, 1.38, 6.3, 443],
-         [29.4, 93.8, 10.3, 22.7, 45.1, 11.8, 2.03, 5.4, 486],
-         [33.2, 80.5, 11.1, 24.4, 32.0, 15.3, 1.69, 4.9, 535]
-       ]
-     }
-     ```
-
-     and will output,
-
-     ```json
-     {
-       "predictions": [2, 2, 2, 2, 2, 0, 1, 2, 1, 1]
-     }
-     ```
-     
-10. Troubleshooting
-    
-      - Log saved at `mlflow_api`
-        
-      - To check if there exists a module and its version, run `python -c "import <module>; print(<module>.__version__)"` after the installation. Replace `<module>` with module name.</br>
+    - Log saved at `mlflow_api`
+    - To check if there exists a module and its version, run `python -c "import <module>; print(<module>.__version__)"` after the installation. Replace `<module>` with module name.</br>
       Ex: `python -c "import pydantic; print(pydantic.__version__)"`.
-      
-      - miniconda installation guide: https://docs.anaconda.com/miniconda/install
-      
-      - Access mlflow tracking server UI: http://127.0.0.1:5000/
+
+    - miniconda installation guide: https://docs.anaconda.com/miniconda/install
+
+    - Access mlflow tracking server UI: http://127.0.0.1:5000/
 
 ### Dataset
 
