@@ -63,7 +63,9 @@ I created this resource for the `Hackers Club`'s Machine Learning session at the
 
 ### Dataset
 
-- **The dataset is from kaggle:** https://www.kaggle.com/datasets/mujtabamatin/air-quality-and-pollution-assessment by @Mujtaba Mateen.
+- **The dataset is from kaggle:** https://www.kaggle.com/datasets/mujtabamatin/air-quality-and-pollution-assessment by @Mujtaba Mateen. It contains 5000 data samples collected from South East Asian Countries (i.e., Pakistan, India, Bangladesh, Sri Lanka).
+
+
 
 - **Features:**
 
