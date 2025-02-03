@@ -1,7 +1,14 @@
+"""
+Author: Eshan Jayasundara
+Date Created: 2025-02-02
+Last Modified: 2025-02-03
+Description: utility functions(logging, preprocessing, feature selection and et cetra) for multiclass calssification
+"""
+
 import logging
 import pandas as pd
 import numpy as np
-from typing import List, Dict
+from typing import List, Dict, Tuple
 from sklearn.model_selection import train_test_split
 import seaborn as sns
 from sklearn.base import BaseEstimator
@@ -577,9 +584,20 @@ def select_features_metric_method(
     """
     logging.info(f"Feature selection using {selector}. Given the sorted feature names in desending order based on feature importance.")
 
-    def find_maxima_coordinates(x_vec:List, y_vec:List):
+
+    def find_maxima_coordinates(x_vec:List, y_vec:List) -> Tuple[float]:
         """
         Method to find the coordinate at maxima
+
+        parameters:
+        x_vec(List): x coordinates as a list
+        y_vec(List): corresponding y coordinates as a list
+
+        returns:
+        Tuple containing two numbers,
+            1. maximum value in the y_vec value -> y_max_
+            2. corresponding x value to y_max_ -> x_at_max_y
+        Eg: (7, 0.836278)
         """
         assert len(x_vec) == len(y_vec), f"Lenght of x and y vectors should be the same.\
             But given len(x_vec)={len(x_vec)} and len(y_vec)={len(y_vec)}"
@@ -672,6 +690,18 @@ def select_features_metric_method(
         
 
 def preprocess_production(X_req_:List[List[float]], pickle_loc:str="caches.pkl") -> pd.DataFrame:
+    """
+    Function to preprocess the data at the production level.
+    This uses the data saved while training(`production/caches.pkl`).
+
+    parameters:
+    X_req_(List[List[float]]): input features formatted according to the body of the POST request
+    pickle_loc(str): location to pickle file
+
+    returns:
+    pd.DataFrame containing the preprocessed and 
+    aligned data to match the model's requirements
+    """
     import pickle
     # load the previously saved caches
     with open(pickle_loc, "rb") as f:
